@@ -113,7 +113,27 @@ struct ZipCodeValidator: ValidatorConvertible {
 }
 
 
-extension Order {
+//extension Order {
+//    func validatedText(validationType: ValidatorType, text: String) throws -> Bool {
+//        let validator = ValidatorFactory.validatorFor(type: validationType)
+//        return try validator.validated(text)
+//    }
+//    
+//    var hasValidAddress: Bool {
+//        do {
+//            let validatedName = try validatedText(validationType: ValidatorType.name, text: name)
+//            let validatedStreetAddress = try validatedText(validationType: ValidatorType.streetAddress, text: streetAddress)
+//            let validatedCity = try validatedText(validationType: ValidatorType.city, text: city)
+//            let validatedZIP = try validatedText(validationType: ValidatorType.zip, text: zip)
+//            return validatedName && validatedStreetAddress && validatedCity && validatedZIP
+//        } catch(let error) {
+//            print((error as! ValidationError).message)
+//        }
+//        return false
+//    }
+//}
+
+extension NewOrderStruct {
     func validatedText(validationType: ValidatorType, text: String) throws -> Bool {
         let validator = ValidatorFactory.validatorFor(type: validationType)
         return try validator.validated(text)
@@ -132,4 +152,3 @@ extension Order {
         return false
     }
 }
-

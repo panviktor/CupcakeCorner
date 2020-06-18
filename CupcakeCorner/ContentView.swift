@@ -7,37 +7,38 @@
 //
 
 import SwiftUI
+import Network
 
 //MARK: - Main Code
 struct ContentView: View {
-    @ObservedObject var order = Order()
-    
+    @ObservedObject var order = NewOrder()
+
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    Picker("Select you cake type", selection:  $order.type) {
-                        ForEach(0..<Order.types.count) {
-                            Text(Order.types[$0])
+                    Picker("Select you cake type", selection:  $order.newOrderStruct.type) {
+                        ForEach(0..<NewOrderStruct.types.count, id: \.self) {
+                            Text(NewOrderStruct.types[$0])
                         }
                     }
                     
-                    Stepper(value: $order.quantity, in: 3...20) {
-                        Text("Number of cakes: \(order.quantity)")
+                    Stepper(value: $order.newOrderStruct.quantity, in: 3...20) {
+                        Text("Number of cakes: \(order.newOrderStruct.quantity)")
                     }
                 }
                 
                 Section {
-                    Toggle(isOn: $order.specialRequestEnabled.animation()) {
+                    Toggle(isOn: $order.newOrderStruct.specialRequestEnabled.animation()) {
                         Text("Any special request?")
                     }
                     
-                    if order.specialRequestEnabled {
-                        Toggle(isOn: $order.extraFrosting) {
+                    if order.newOrderStruct.specialRequestEnabled {
+                        Toggle(isOn: $order.newOrderStruct.extraFrosting) {
                             Text("Add extra frosting")
                         }
-                
-                        Toggle(isOn: $order.addSprinkles) {
+                        
+                        Toggle(isOn: $order.newOrderStruct.addSprinkles) {
                             Text("Add extra sprinkles")
                         }
                     }
